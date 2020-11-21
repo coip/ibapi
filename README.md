@@ -1,36 +1,8 @@
-# Interactive Brokers API - GoLang Implement
-
-<img
-style="display: block; margin: 0 auto;"
-src="http://interactivebrokers.github.io/tws-api/nav_iblogo.png"
-/>
-
-* Interactive Brokers API 9.80
-* pure golang Implement
-* Unofficial, use at you own risk
-
-## INSTALL
-
-`go get -u github.com/hadrianl/ibapi`
-
----
-
-## USAGE
-
-Implement `IbWrapper` to handle datas delivered via tws or gateway, `Wrapper` in demo is a default implement that just output data to std.
-[Go to IbWrapper](https://github.com/hadrianl/ibapi/blob/83846bf1194bbdc4f039c8c66033f717e015e9fc/wrapper.go#L11)
-
-1. **implement** your own `IbWrapper`
-2. **connect** to TWS or Gateway
-3. **handshake** with TWS or Gateway
-4. **run** the loop
-5. do some **request**
-
-### Demo 1
+kudos to [hadrianl](github.com/hadrianl) for developing a wonderful core api impl to interface with tws!
 
 ```golang
 import (
-    . "github.com/hadrianl/ibapi"
+    . "github.com/coip/ibapi"
     "time"
 )
 
@@ -72,53 +44,3 @@ func main(){
 }
 
 ```
-
-### Demo 2 with context
-
-```golang
-import (
-    . "github.com/hadrianl/ibapi"
-    "time"
-    "context"
-)
-
-func main(){
-    var err error
-    log := GetLogger().Sugar()
-    defer log.Sync()
-    ibwrapper := &Wrapper{}
-    ctx, _ := context.WithTimeout(context.Background(), time.Second*30)
-    ic := NewIbClient(ibwrapper)
-    ic.SetContext(ctx)
-    err = ic.Connect("127.0.0.1", 4002, 0)
-    if err != nil {
-        log.Panic("Connect failed:", err)
-    }
-
-    err = ic.HandShake()
-    if err != nil {
-        log.Panic("HandShake failed:", err)
-    }
-
-    ic.ReqCurrentTime()
-    ic.ReqAutoOpenOrders(true)
-    ic.ReqAccountUpdates(true, "")
-    ic.ReqExecutions(ic.GetReqID(), ExecutionFilter{})
-
-    ic.Run()
-    err = ic.LoopUntilDone()  // block until ctx or ic is done
-    log.Info(err)
-}
-
-```
-
----
-
-## Reference
-
-1. [Offical Document](https://interactivebrokers.github.io/tws-api/)
-2. [Order Types](https://www.interactivebrokers.com/en/index.php?f=4985)
-3. [Product](https://www.interactivebrokers.com/en/index.php?f=4599)
-4. [Margin](https://www.interactivebrokers.com/en/index.php?f=24176)
-5. [Market Data](https://www.interactivebrokers.com/en/index.php?f=14193)
-6. [Commissions](https://www.interactivebrokers.com/en/index.php?f=1590)
