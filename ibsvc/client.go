@@ -2981,6 +2981,10 @@ func (ic *IbClient) Run() error {
 	return nil
 }
 
+func (ic *IbClient) ListenForSentinel() {
+	<-ic.done
+}
+
 // LoopUntilDone will call goroutines and block until the client context is done or the client is disconnected.
 // reconnection should do after this
 func (ic *IbClient) LoopUntilDone(fs ...func()) error {

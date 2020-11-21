@@ -47,6 +47,7 @@ func main() {
 	select {
 
 	case <-time.After(time.Second * 5):
+		go ic.ListenForSentinel()
 		ic.Disconnect()
 
 	}
