@@ -2,7 +2,7 @@
 ordercondition contains several OrderCondition, such as Price, Time, Margin, Execution, Volume, PercentChange
 */
 
-package ibapi
+package ibsvc
 
 import "go.uber.org/zap"
 

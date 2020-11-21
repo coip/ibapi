@@ -1,6 +1,6 @@
 /* connection handle the tcp socket to the TWS or IB Gateway*/
 
-package ibapi
+package ibsvc
 
 import (
 	"net"

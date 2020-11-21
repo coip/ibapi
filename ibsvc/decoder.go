@@ -1,4 +1,4 @@
-package ibapi
+package ibsvc
 
 import (
 	"strings"

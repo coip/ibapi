@@ -1,4 +1,4 @@
-package ibapi
+package ibsvc
 
 // IbError is ib internal errors
 type IbError struct {

@@ -1,4 +1,4 @@
-package ibapi
+package ibsvc
 
 // IN identifies the msg type of the buf received from TWS or Gateway
 type IN = int64
