@@ -43,12 +43,12 @@ func main() {
 
 	// start to send req and receive msg from tws or gateway after this
 	ic.Run()
-	for {
-		select {
-		case <-time.After(time.Second * 2):
 
-			ic.Disconnect()
+	select {
 
-		}
+	case <-time.After(time.Second * 5):
+		ic.Disconnect()
+
 	}
+
 }
