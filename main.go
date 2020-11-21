@@ -3,11 +3,16 @@ package main
 import (
 	"time"
 
+	"net/http"
+	_ "net/http/pprof"
+
 	"github.com/coip/rebus/ibsvc"
 )
 
 func main() {
-
+	go func() {
+		panic(http.ListenAndServe(":6060", nil))
+	}()
 	// internal api log is zap log, you could use GetLogger to get the logger
 	// besides, you could use SetAPILogger to set you own log option
 	// or you can just use the other logger
